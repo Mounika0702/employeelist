@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  store:
+    image: testv1
+    restart: always
+    ports:
+      - "8000:8080"
+  list:
+    depends_on:
+      - store
+    image: testapp:v1
+    ports:
+      - "8081:8081"
+    restart: always
+    links:
+      -  store:store
+    environment:
+       EMPLOYEE_STORE: "http://store:8080/api/listemployee/"

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: emplist
+  name: emplist
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emplist
+  template:
+    metadata:
+      labels:
+        app: emplist
+    spec:
+      containers:
+              - image: mounika0702/employeelist:v1
+          name: emplist
+          env:
+            - name: EMPLOYEE_STORE
+              value:  "http://empstore:8080/api/listemployee/"
